@@ -1,22 +1,200 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI World Builder</title>
-    <link rel="stylesheet" href="style.css">
+<title>AI World Builder</title>
+<style>
+body{
+margin:0;
+overflow:hidden;
+}
+
+#ui{
+position:absolute;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+z-index:10;
+}
+
+input{
+width:300px;
+padding:10px;
+}
+
+button{
+padding:10px;
+}
+
+</style>
 </head>
 
 <body>
 
-<div id="game"></div>
-
 <div id="ui">
-    <input id="command" placeholder="np. stwórz drzewo">
-    <button onclick="createObject()">Stwórz</button>
+<input id="prompt" placeholder="np. stwórz drzewo">
+<button onclick="generate()">GENERUJ</button>
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="script.js"></script>
+<script type="module">
+
+import * as THREE from 
+'https://unpkg.com/three@0.160.0/build/three.module.js';
+
+
+let scene = new THREE.Scene();
+
+scene.background = new THREE.Color(0x87ceeb);
+
+
+
+let camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
+
+
+camera.position.set(0,5,10);
+
+
+
+let renderer = new THREE.WebGLRenderer();
+
+renderer.setSize(
+window.innerWidth,
+window.innerHeight
+);
+
+document.body.appendChild(renderer.domElement);
+
+
+
+// ziemia
+
+let ground = new THREE.Mesh(
+new THREE.PlaneGeometry(200,200),
+new THREE.MeshStandardMaterial({
+color:"green"
+})
+);
+
+
+ground.rotation.x=-Math.PI/2;
+
+scene.add(ground);
+
+
+
+// światło
+
+let light=new THREE.HemisphereLight(
+0xffffff,
+0x444444,
+2
+);
+
+scene.add(light);
+
+
+
+
+// generator
+
+window.generate=function(){
+
+let text=
+document.getElementById("prompt")
+.value
+.toLowerCase();
+
+
+let obj;
+
+
+if(text.includes("drzewo")){
+
+
+obj=new THREE.Mesh(
+new THREE.CylinderGeometry(
+0.5,
+0.7,
+3
+),
+
+new THREE.MeshStandardMaterial({
+color:"brown"
+})
+);
+
+
+obj.position.y=1.5;
+
+
+let top=new THREE.Mesh(
+new THREE.SphereGeometry(2),
+new THREE.MeshStandardMaterial({
+color:"green"
+})
+);
+
+
+top.position.y=3.5;
+
+scene.add(top);
+
+
+}
+
+
+
+else if(text.includes("dom")){
+
+
+obj=new THREE.Mesh(
+new THREE.BoxGeometry(
+4,3,4
+),
+
+new THREE.MeshStandardMaterial({
+color:"white"
+})
+);
+
+
+obj.position.y=1.5;
+
+
+}
+
+
+if(obj)
+scene.add(obj);
+
+
+}
+
+
+
+
+function animate(){
+
+requestAnimationFrame(animate);
+
+renderer.render(
+scene,
+camera
+);
+
+}
+
+
+animate();
+
+
+
+</script>
 
 </body>
 </html>
