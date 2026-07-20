@@ -4,72 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The R Function - Recursive Tetration</title>
+<title>The R Function - Recursive Tetration Hierarchy</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: #0b0b12;
-        color: white;
-        line-height: 1.6;
-    }
+body {
+    margin: 0;
+    background: #080812;
+    color: white;
+    font-family: Arial, sans-serif;
+}
 
-    .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 30px;
-    }
+.container {
+    max-width: 950px;
+    margin: auto;
+    padding: 35px;
+}
 
-    h1 {
-        text-align: center;
-        font-size: 42px;
-        color: #8b5cf6;
-    }
+h1 {
+    text-align: center;
+    font-size: 45px;
+    color: #a78bfa;
+}
 
-    h2 {
-        color: #38bdf8;
-        border-bottom: 2px solid #222;
-        padding-bottom: 8px;
-    }
+h2 {
+    color: #38bdf8;
+}
 
-    .card {
-        background: #151522;
-        padding: 25px;
-        border-radius: 15px;
-        margin: 20px 0;
-        box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
+.card {
+    background: #151522;
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 18px;
+    box-shadow: 0 0 25px #000;
+}
 
-    .formula {
-        background: #09090f;
-        padding: 15px;
-        border-radius: 10px;
-        font-size: 22px;
-        text-align: center;
-        color: #facc15;
-        margin: 15px 0;
-        font-family: "Times New Roman", serif;
-    }
+.formula {
+    background: #050509;
+    padding: 18px;
+    margin: 15px 0;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 26px;
+    color: #facc15;
+    font-family: "Times New Roman", serif;
+}
 
-    .example {
-        color: #a7f3d0;
-    }
+.info {
+    color: #86efac;
+}
 
-    ul {
-        padding-left: 25px;
-    }
+.note {
+    color: #f472b6;
+    font-weight: bold;
+}
 
-    .highlight {
-        color: #f472b6;
-        font-weight: bold;
-    }
-
-    footer {
-        text-align: center;
-        margin-top: 40px;
-        color: gray;
-    }
+footer {
+    text-align:center;
+    color:#888;
+    margin-top:40px;
+}
 </style>
 
 </head>
@@ -81,35 +74,33 @@
 <h1>The R Function</h1>
 
 <p style="text-align:center">
-Recursive Tetration Hierarchy for Extremely Large Numbers
+A recursive tetration hierarchy for extremely large numbers
 </p>
 
 
 <div class="card">
 
-<h2>1. First Level</h2>
+<h2>1. Definition of the first level</h2>
 
 <p>
-The first level of the R function is defined as:
+The first level of the R function is:
 </p>
 
 <div class="formula">
-𝑅₁(3) = 3^^3
+R₁(3) = 3^^3
 </div>
 
 <p>
-The symbol <b>^^</b> represents <b>tetration</b>.
-It creates a power tower where numbers are repeatedly exponentiated.
+The symbol <b>^^</b> means tetration.
+It creates a power tower.
 </p>
 
 <div class="formula">
 3^^3 = 3<sup>(3<sup>3</sup>)</sup>
 </div>
 
-<p class="example">
-Therefore:
-<br>
-𝑅₁(3) = 7,625,597,484,987
+<p class="info">
+R₁(3) = 7,625,597,484,987
 </p>
 
 </div>
@@ -118,76 +109,49 @@ Therefore:
 
 <div class="card">
 
-<h2>2. Recursive Levels</h2>
+<h2>2. Recursive growth</h2>
 
 <p>
-Every next R-level applies the previous level to its own result.
+Each new R level uses the previous level recursively.
 </p>
 
 
 <div class="formula">
-𝑅₂(3) = 𝑅₁(𝑅₁(3))
+R₂(3) = R₁(R₁(3))
 </div>
 
+
 <p>
-Meaning:
+The function applies itself again using the previous result as input.
 </p>
+
+
+<div class="formula">
+R₃(3) = R₂(R₂(3))
+</div>
+
+
+<p>
+Every increase of the index creates a much faster growing number.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>3. General notation</h2>
+
+
+<div class="formula">
+Rₓ(n)
+</div>
+
 
 <ul>
-<li>First calculate 𝑅₁(3)</li>
-<li>Use that number as the input of 𝑅₁</li>
-</ul>
-
-
-<div class="formula">
-𝑅₂(3) = 𝑅₁(7,625,597,484,987)
-</div>
-
-<p>
-Which becomes:
-</p>
-
-<div class="formula">
-3^^7,625,597,484,987
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>3. Higher Recursion</h2>
-
-<div class="formula">
-𝑅₃(3) = 𝑅₂(𝑅₂(3))
-</div>
-
-<p>
-The same process is repeated again.
-Each additional layer makes the number grow faster than the previous one.
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>General Form</h2>
-
-<div class="formula">
-𝑅ₓ(n)
-</div>
-
-
-<p>
-Where:
-</p>
-
-<ul>
-<li><span class="highlight">x</span> = number of recursive layers</li>
-<li><span class="highlight">n</span> = starting value</li>
+<li><b>x</b> = number of recursive layers</li>
+<li><b>n</b> = starting value</li>
 </ul>
 
 
@@ -195,12 +159,12 @@ Where:
 Examples:
 </p>
 
-<ul>
-<li>𝑅₁ = tetration</li>
-<li>𝑅₂ = recursive tetration</li>
-<li>𝑅₃ = recursion of recursion</li>
-<li>𝑅₁₀₀ = repeating the process 100 times</li>
-</ul>
+<div class="formula">
+R₁ = tetration<br>
+R₂ = recursive tetration<br>
+R₃ = recursion of recursion
+</div>
+
 
 </div>
 
@@ -208,34 +172,60 @@ Examples:
 
 <div class="card">
 
-<h2>Higher Levels</h2>
+<h2>4. Sigma Function (Σ)</h2>
 
 
 <p>
-A higher level can be created using a symbol such as:
+Sigma is a function that creates the level of recursion.
 </p>
 
 
 <div class="formula">
-Σ = 3^^3
+Σ(n) = n^^n
 </div>
 
 
 <p>
-Then:
+The result of Σ becomes the index of R.
 </p>
+
+
+<h3>Example 1:</h3>
 
 
 <div class="formula">
-𝑅Σ(3) = 𝑅₍₃^^₃₎(3)
+Σ(2)=2^^2
 </div>
 
 
-<p>
-The recursion level itself becomes an enormous number.
-Instead of repeating the process thousands of times, it can repeat it
-millions, billions, or even more times.
-</p>
+<div class="formula">
+2^^2=4
+</div>
+
+
+<div class="formula">
+RΣ(2)=R₄(2)
+</div>
+
+
+
+<h3>Example 2:</h3>
+
+
+<div class="formula">
+Σ(3)=3^^3
+</div>
+
+
+<div class="formula">
+Σ(3)=7,625,597,484,987
+</div>
+
+
+<div class="formula">
+RΣ(3)=R₇,625,597,484,987(3)
+</div>
+
 
 </div>
 
@@ -243,30 +233,58 @@ millions, billions, or even more times.
 
 <div class="card">
 
-<h2>Concept</h2>
+<h2>5. Meaning</h2>
+
+<p>
+RΣ(n) means:
+</p>
+
+<div class="formula">
+RΣ(n)=R₍Σ(n)₎(n)
+</div>
+
+
+<p>
+First calculate Σ(n), then use that number as the recursion level of R.
+</p>
+
+
+<p class="note">
+The recursion depth itself becomes an enormous number.
+</p>
+
+
+</div>
+
+
+
+<div class="card">
+
+<h2>6. Concept</h2>
 
 <p>
 The R function is a custom fast-growing hierarchy inspired by googology.
-It is similar in idea to systems such as:
+It is designed to describe extremely large numbers that cannot be written
+normally.
 </p>
 
 <ul>
-<li>Ackermann-type functions</li>
-<li>Fast-growing hierarchies</li>
-<li>Large-number notation systems</li>
+<li>Exponentiation</li>
+<li>Tetration</li>
+<li>Recursive tetration</li>
+<li>Higher recursive levels</li>
 </ul>
 
-
 <p>
-The exact value cannot be written because the numbers become too large.
-The purpose is to describe different levels of growth.
+The purpose is not calculating the exact value, but describing the speed
+of growth.
 </p>
 
 </div>
 
 
 <footer>
-R Function • Recursive Tetration System
+R Function - Recursive Tetration System
 </footer>
 
 
