@@ -1,200 +1,276 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>AI World Builder</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The R Function - Recursive Tetration</title>
+
 <style>
-body{
-margin:0;
-overflow:hidden;
-}
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #0b0b12;
+        color: white;
+        line-height: 1.6;
+    }
 
-#ui{
-position:absolute;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-z-index:10;
-}
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 30px;
+    }
 
-input{
-width:300px;
-padding:10px;
-}
+    h1 {
+        text-align: center;
+        font-size: 42px;
+        color: #8b5cf6;
+    }
 
-button{
-padding:10px;
-}
+    h2 {
+        color: #38bdf8;
+        border-bottom: 2px solid #222;
+        padding-bottom: 8px;
+    }
 
+    .card {
+        background: #151522;
+        padding: 25px;
+        border-radius: 15px;
+        margin: 20px 0;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .formula {
+        background: #09090f;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 22px;
+        text-align: center;
+        color: #facc15;
+        margin: 15px 0;
+        font-family: "Times New Roman", serif;
+    }
+
+    .example {
+        color: #a7f3d0;
+    }
+
+    ul {
+        padding-left: 25px;
+    }
+
+    .highlight {
+        color: #f472b6;
+        font-weight: bold;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        color: gray;
+    }
 </style>
+
 </head>
 
 <body>
 
-<div id="ui">
-<input id="prompt" placeholder="np. stwórz drzewo">
-<button onclick="generate()">GENERUJ</button>
+<div class="container">
+
+<h1>The R Function</h1>
+
+<p style="text-align:center">
+Recursive Tetration Hierarchy for Extremely Large Numbers
+</p>
+
+
+<div class="card">
+
+<h2>1. First Level</h2>
+
+<p>
+The first level of the R function is defined as:
+</p>
+
+<div class="formula">
+𝑅₁(3) = 3^^3
+</div>
+
+<p>
+The symbol <b>^^</b> represents <b>tetration</b>.
+It creates a power tower where numbers are repeatedly exponentiated.
+</p>
+
+<div class="formula">
+3^^3 = 3<sup>(3<sup>3</sup>)</sup>
+</div>
+
+<p class="example">
+Therefore:
+<br>
+𝑅₁(3) = 7,625,597,484,987
+</p>
+
 </div>
 
 
-<script type="module">
 
-import * as THREE from 
-'https://unpkg.com/three@0.160.0/build/three.module.js';
+<div class="card">
 
+<h2>2. Recursive Levels</h2>
 
-let scene = new THREE.Scene();
+<p>
+Every next R-level applies the previous level to its own result.
+</p>
 
-scene.background = new THREE.Color(0x87ceeb);
 
+<div class="formula">
+𝑅₂(3) = 𝑅₁(𝑅₁(3))
+</div>
 
+<p>
+Meaning:
+</p>
 
-let camera = new THREE.PerspectiveCamera(
-75,
-window.innerWidth/window.innerHeight,
-0.1,
-1000
-);
+<ul>
+<li>First calculate 𝑅₁(3)</li>
+<li>Use that number as the input of 𝑅₁</li>
+</ul>
 
 
-camera.position.set(0,5,10);
+<div class="formula">
+𝑅₂(3) = 𝑅₁(7,625,597,484,987)
+</div>
 
+<p>
+Which becomes:
+</p>
 
+<div class="formula">
+3^^7,625,597,484,987
+</div>
 
-let renderer = new THREE.WebGLRenderer();
+</div>
 
-renderer.setSize(
-window.innerWidth,
-window.innerHeight
-);
 
-document.body.appendChild(renderer.domElement);
 
+<div class="card">
 
+<h2>3. Higher Recursion</h2>
 
-// ziemia
+<div class="formula">
+𝑅₃(3) = 𝑅₂(𝑅₂(3))
+</div>
 
-let ground = new THREE.Mesh(
-new THREE.PlaneGeometry(200,200),
-new THREE.MeshStandardMaterial({
-color:"green"
-})
-);
+<p>
+The same process is repeated again.
+Each additional layer makes the number grow faster than the previous one.
+</p>
 
+</div>
 
-ground.rotation.x=-Math.PI/2;
 
-scene.add(ground);
 
+<div class="card">
 
+<h2>General Form</h2>
 
-// światło
+<div class="formula">
+𝑅ₓ(n)
+</div>
 
-let light=new THREE.HemisphereLight(
-0xffffff,
-0x444444,
-2
-);
 
-scene.add(light);
+<p>
+Where:
+</p>
 
+<ul>
+<li><span class="highlight">x</span> = number of recursive layers</li>
+<li><span class="highlight">n</span> = starting value</li>
+</ul>
 
 
+<p>
+Examples:
+</p>
 
-// generator
+<ul>
+<li>𝑅₁ = tetration</li>
+<li>𝑅₂ = recursive tetration</li>
+<li>𝑅₃ = recursion of recursion</li>
+<li>𝑅₁₀₀ = repeating the process 100 times</li>
+</ul>
 
-window.generate=function(){
+</div>
 
-let text=
-document.getElementById("prompt")
-.value
-.toLowerCase();
 
 
-let obj;
+<div class="card">
 
+<h2>Higher Levels</h2>
 
-if(text.includes("drzewo")){
 
+<p>
+A higher level can be created using a symbol such as:
+</p>
 
-obj=new THREE.Mesh(
-new THREE.CylinderGeometry(
-0.5,
-0.7,
-3
-),
 
-new THREE.MeshStandardMaterial({
-color:"brown"
-})
-);
+<div class="formula">
+Σ = 3^^3
+</div>
 
 
-obj.position.y=1.5;
+<p>
+Then:
+</p>
 
 
-let top=new THREE.Mesh(
-new THREE.SphereGeometry(2),
-new THREE.MeshStandardMaterial({
-color:"green"
-})
-);
+<div class="formula">
+𝑅Σ(3) = 𝑅₍₃^^₃₎(3)
+</div>
 
 
-top.position.y=3.5;
+<p>
+The recursion level itself becomes an enormous number.
+Instead of repeating the process thousands of times, it can repeat it
+millions, billions, or even more times.
+</p>
 
-scene.add(top);
+</div>
 
 
-}
 
+<div class="card">
 
+<h2>Concept</h2>
 
-else if(text.includes("dom")){
+<p>
+The R function is a custom fast-growing hierarchy inspired by googology.
+It is similar in idea to systems such as:
+</p>
 
+<ul>
+<li>Ackermann-type functions</li>
+<li>Fast-growing hierarchies</li>
+<li>Large-number notation systems</li>
+</ul>
 
-obj=new THREE.Mesh(
-new THREE.BoxGeometry(
-4,3,4
-),
 
-new THREE.MeshStandardMaterial({
-color:"white"
-})
-);
+<p>
+The exact value cannot be written because the numbers become too large.
+The purpose is to describe different levels of growth.
+</p>
 
+</div>
 
-obj.position.y=1.5;
 
+<footer>
+R Function • Recursive Tetration System
+</footer>
 
-}
 
-
-if(obj)
-scene.add(obj);
-
-
-}
-
-
-
-
-function animate(){
-
-requestAnimationFrame(animate);
-
-renderer.render(
-scene,
-camera
-);
-
-}
-
-
-animate();
-
-
-
-</script>
+</div>
 
 </body>
 </html>
